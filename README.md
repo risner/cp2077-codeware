@@ -1,4 +1,5 @@
-# Codeware Lib
+# Codeware Lib (macOS)
+A fork of  psiberx's cp2077-codeware for macOS with no RED4ext support.
 
 ## Features
 
