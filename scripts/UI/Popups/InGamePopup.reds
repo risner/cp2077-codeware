@@ -15,7 +15,6 @@ module Codeware.UI
 
 public abstract class InGamePopup extends CustomPopup {
     protected let m_vignette: wref<inkImage>;
-
     protected let m_container: wref<inkCompoundWidget>;
 
     protected cb func OnCreate() {
@@ -31,10 +30,11 @@ public abstract class InGamePopup extends CustomPopup {
         vignette.SetAtlasResource(r"base\\gameplay\\gui\\widgets\\notifications\\vignette.inkatlas");
         vignette.SetTexturePart(n"vignette_1");
         vignette.SetNineSliceScale(true);
-        vignette.SetTintColor(new HDRColor(1.1761, 0.3809, 0.3476, 1.0));
+        vignette.SetStyle(r"base\\gameplay\\gui\\common\\main_colors.inkstyle");
+        vignette.BindProperty(n"tintColor", n"MainColors.Red");
         vignette.SetSize(32.0, 32.0);
         vignette.SetAnchor(inkEAnchor.CenterFillHorizontaly);
-        vignette.SetAnchorPoint(new Vector2(0.5, 0.5));
+        vignette.SetAnchorPoint(Vector2(0.5, 0.5));
         vignette.SetHAlign(inkEHorizontalAlign.Center);
         vignette.SetVAlign(inkEVerticalAlign.Center);
         vignette.SetFitToContent(true);
@@ -46,10 +46,10 @@ public abstract class InGamePopup extends CustomPopup {
     protected func CreateContainer() {
         let container: ref<inkCanvas> = new inkCanvas();
         container.SetName(n"container");
-        container.SetMargin(new inkMargin(0.0, 0.0, 0.0, 200.0));
+        container.SetMargin(inkMargin(0.0, 0.0, 0.0, 200.0));
         container.SetAnchor(inkEAnchor.Centered);
-        container.SetAnchorPoint(new Vector2(0.5, 0.5));
-        container.SetSize(new Vector2(1550.0, 840.0));
+        container.SetAnchorPoint(Vector2(0.5, 0.5));
+        container.SetSize(Vector2(1550.0, 840.0));
         container.Reparent(this.GetRootCompoundWidget());
 
         this.m_container = container;
@@ -76,11 +76,11 @@ public abstract class InGamePopup extends CustomPopup {
     }
 
     protected func SetTimeDilation() {
-        TimeDilationHelper.SetTimeDilationWithProfile(this.GetPlayer(), "radialMenu", true);
+        TimeDilationHelper.SetTimeDilationWithProfile(this.GetPlayer(), "radialMenu", true, true);
     }
 
     protected func ResetTimeDilation() {
-        TimeDilationHelper.SetTimeDilationWithProfile(this.GetPlayer(), "radialMenu", false);
+        TimeDilationHelper.SetTimeDilationWithProfile(this.GetPlayer(), "radialMenu", false, false);
     }
 
     protected func SetBackgroundBlur() {
@@ -109,5 +109,9 @@ public abstract class InGamePopup extends CustomPopup {
 
     protected func PlayHideSound() {
         //this.PlaySound(n"RadialMenu", n"OnClose");
+    }
+
+    public func GetQueueName() -> CName {
+        return n"game_popup";
     }
 }
