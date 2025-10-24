@@ -22,7 +22,7 @@ all: $(ZIP)
 
 $(ZIP): $(SRC)
 	@mkdir $(ZIPDIR) > /dev/null 2>&1 || true
-	@$(BSDTAR) -v --format=zip -s "#^\.#$(REL)#" -cf $(@) $(SRC)
+	@$(BSDTAR) -v --format=zip -s "#^\.#r6/scripts/$(REL)#" -cf $(@) $(SRC)
 
 clean:
 	rm -f $(ZIP)
